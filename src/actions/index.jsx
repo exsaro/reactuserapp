@@ -7,6 +7,14 @@ return ({
   list
 })}
 
+export const updateList = (list,id) => { 
+  return ({
+    type: 'UPDATE_LIST',
+    list,
+    id
+  })}
+
+
 export const editList = id => { 
 return ({
     type: 'EDIT_LIST',

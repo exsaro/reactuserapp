@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addList, editList } from '../actions/index';
+import { addList, editList, updateList } from '../actions/index';
 
 class Home extends Component {
     state = { 
@@ -52,9 +52,12 @@ class Home extends Component {
     }
     getFormData = (e) => {
         e.preventDefault();
+        if(this.props.editData){
+            this.props.dispatch(updateList(this.state))    
+        }else{
+            this.props.dispatch(addList(this.state))
+        }
         
-        this.props.dispatch(addList(this.state))
-
         //console.log(this.state);
         this.setState({
             name:'',
