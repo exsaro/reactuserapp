@@ -7,11 +7,10 @@ return ({
   list
 })}
 
-export const updateList = (list,id) => { 
+export const updateList = list => { 
   return ({
     type: 'UPDATE_LIST',
-    list,
-    id
+    list
   })}
 
 

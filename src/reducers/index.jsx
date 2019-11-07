@@ -1,5 +1,4 @@
 const lists = (state = { lists: [], editData: {} }, action) => {
-    debugger;
     switch (action.type) {
       case 'ADD_LIST':
         return {lists: [
@@ -14,15 +13,20 @@ const lists = (state = { lists: [], editData: {} }, action) => {
     case 'EDIT_LIST':
       return {
           lists: state.lists,
-          editData: state.lists ? state.lists.filter((obj) => obj.id == action.id)[0] : {}
+          editData: state.lists.length > 0 ? state.lists.filter((obj) => obj.id == action.id)[0] : {}
       }
     case 'UPDATE_LIST':
+      let newLists = [];
+      if(state.lists.length > 0) {
+        newLists = [...state.lists];
+      }
+       
       return {
-          lists: state.lists,
-          editData: state.lists ? state.lists.map((obj) => {if(obj.id == action.id){
-            debugger;
-            return obj = action.list;
-          }})[0] : {}
+          lists: newLists.length > 0 ? newLists.map((obj) =>{
+            if(obj.id == state.editData.id)
+             return {...state.editData, list: action.list};
+          }) : [],
+          editData: {...state.editData, list: action.list}
       }
     default:
       return state

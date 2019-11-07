@@ -9,8 +9,10 @@ class Home extends Component {
         mobile:''
      }
     
+    
     componentDidMount(){
-        this.props.dispatch(editList(this.props.match.params.id));
+        if(Object.keys(this.props.match.params).length > 0)
+            this.props.dispatch(editList(this.props.match.params.id));
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -41,6 +43,11 @@ class Home extends Component {
             </form>
          );
     }
+    // getUpdateValue = (e) => {
+    //     const fData = {...this.state}
+    //     fData[e.target.name] = e.target.value;
+    //     this.setState({fData});
+    // }
     getName = (e) =>{
         this.setState({name: e.target.value})
     }
@@ -52,7 +59,8 @@ class Home extends Component {
     }
     getFormData = (e) => {
         e.preventDefault();
-        if(this.props.editData){
+        
+        if(Object.keys(this.props.editData).length > 0){
             this.props.dispatch(updateList(this.state))    
         }else{
             this.props.dispatch(addList(this.state))
